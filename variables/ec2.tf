@@ -1,11 +1,4 @@
-resource "aws_instance" "terraform" {
-    ami_id = var.ami_id
-    instance_type = var.instance_type
-    vpc_security_group_ids = [aws_security_group.allow_ssh_terraform.id]
-    tags = var.tags
-}
-
-resource "aws_security_group" "allow-ssh_terraform" {
+resource "aws_security_group" "allow_ssh_terraform" {
     name = var.sg_name
     description = var.description
 
@@ -26,4 +19,11 @@ resource "aws_security_group" "allow-ssh_terraform" {
         cidr_blocks = var.ingress_cidr_blocks
         ipv6_cidr_blocks = var.ingress_ipv6_cidr_blocks
     }
+}
+
+resource "aws_instance" "terraform" {
+    ami_id = var.ami_id
+    instance_type = var.instance_type
+    vpc_security_group_ids = [aws_security_group.allow_ssh_terraform.id]
+    tags = var.tags
 }
