@@ -19,7 +19,7 @@ variable "tags" {
     }
 }
 
-variable "name" {
+variable "sg_name" {
     default = "allow_ssh"
     type = string
 
