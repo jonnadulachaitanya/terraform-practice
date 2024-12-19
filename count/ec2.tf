@@ -18,19 +18,25 @@ resource "aws_security_group" "allow_ssh_terraform" {
         ipv6_cidr_blocks = ["::/0"]
     }
 
-    tags  = {
-        Name = "allow_ssh"
-    }
+    tags = merge (
+        var.common_tags,
+        {
+            Name = "allow_ssh"
+        }
+    )
 }
 
 resource "aws_instance" "terraform" {
-    count = 3
+    count = length(var.instance_names)
     ami = "ami-09c813fb71547fc4f"
-    instance_type = var.instance_types[count.index]
+    instance_type = "t3.micro"
     vpc_security_group_ids = [aws_security_group.allow_ssh_terraform.id]
 
-    tags = {
-        Name = var.instance_names[count.index]    # count[0],[1],[2]
-    }
+    tags = merge (
+        var.common_tags,
+        {
+            Name = var.instance_names[count.index]    # count[0],[1],[2]
+        }
+    )
     
 }
