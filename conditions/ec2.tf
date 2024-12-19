@@ -6,7 +6,7 @@ resource "aws_security_group" "allow_ssh_terraform" {
         from_port = 0
         to_port = 0
         protocol = "-1"
-        cidr_block = ["0.0.0.0/0"]
+        cidr_blocks = ["0.0.0.0/0"]
         ipv6_cidr_blocks = ["::/0"]
     } 
 
@@ -14,7 +14,7 @@ resource "aws_security_group" "allow_ssh_terraform" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_block = ["0.0.0.0/0"]
+        cidr_blocks = ["0.0.0.0/0"]
         ipv6_cidr_blocks = ["::/0"]
     }
 
@@ -28,11 +28,8 @@ resource "aws_instance" "terraform" {
     instance_type = var.environment == "dev" ? "t3.micro" : "t3.small"
     vpc_security_group_ids = [aws_security_group.allow_ssh_terraform.id]
 
-    tags = {
-        type = map
-        default = {
-            Name = "terraform"
-            environment = "production"
-        }
+    tags = {       
+        Name = "terraform"
+        environment = "production"
     }
 }
