@@ -25,6 +25,14 @@ variable "sg_name" {
 
 }
 
+variable "sg_tags" {
+    type = map
+    default = {
+        Name = "allow_ssh"
+        Environment = "development"
+    }
+}
+
 variable "description" {
     default = "port 22 for accessing ssh"
     type = string

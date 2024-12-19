@@ -19,6 +19,8 @@ resource "aws_security_group" "allow_ssh_terraform" {
         cidr_blocks = var.ingress_cidr_blocks
         ipv6_cidr_blocks = var.ingress_ipv6_cidr_blocks
     }
+
+    tags = 
 }
 
 resource "aws_instance" "terraform" {
