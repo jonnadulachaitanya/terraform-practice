@@ -46,7 +46,7 @@ variable "protocol" {
 }
 
 variable "ingress_cidr_blocks" {
-    default = ["0.0.0.0./0"]
+    default = ["0.0.0.0/0"]
     type = list(string)
 
 }
